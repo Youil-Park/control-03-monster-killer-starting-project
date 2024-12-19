@@ -3,6 +3,9 @@ const STRONG_ATTACK_VALUE = 17;   // 최대 강한 공격력
 const MONSTER_ATTACK_VALUE = 14;  // 몬스터의 최대 공격력
 const HEAL_VALUE = 20;          // 최대 회복 체력
 
+const MODE_ATTACK = 'ATTACK'; // MODE_ATTACK = 0
+const MODE_STRONG_ATTACK = 'STRONG_ATTACK'; // MODE_STRONG_ATTACK = 1
+
 const enteredValue = prompt('Maximum life for you and the monster.', '100');
 
 let chosenMaxLife = parseInt(enteredValue);     // 몬스터의 최대 체력
@@ -60,9 +63,9 @@ function endRound() {
 // ATTACK, STRONG ATTACK 버튼 핸들러
 function attackMonster(mode) {
   let maxDamage;
-  if (mode === 'ATTACK') { // ATTACK 버튼
+  if (mode === MODE_ATTACK) { // ATTACK 버튼
     maxDamage = ATTACK_VALUE;
-  } else if(mode === 'STRONG_ATTACK'){  // STRONG ATTACK 버튼
+  } else if(mode === MODE_STRONG_ATTACK){  // STRONG ATTACK 버튼
     maxDamage = STRONG_ATTACK_VALUE;
   }
 
@@ -73,12 +76,12 @@ function attackMonster(mode) {
 
 // ATTACK
 function attackHandler() {
-  attackMonster('ATTACK');
+  attackMonster(MODE_ATTACK);
 }
 
 // STRONG ATTACK
 function strongAttackHadler() {
-  attackMonster('STRONG_ATTACK');
+  attackMonster(MODE_STRONG_ATTACK);
 }
 
 // HEAL
