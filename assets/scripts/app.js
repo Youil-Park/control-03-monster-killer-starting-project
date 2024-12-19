@@ -3,7 +3,15 @@ const STRONG_ATTACK_VALUE = 17;   // 최대 강한 공격력
 const MONSTER_ATTACK_VALUE = 14;  // 몬스터의 최대 공격력
 const HEAL_VALUE = 20;          // 최대 회복 체력
 
-let chosenMaxLife = 100;     // 몬스터의 최대 체력
+const enteredValue = prompt('Maximum life for you and the monster.', '100');
+
+let chosenMaxLife = parseInt(enteredValue);     // 몬스터의 최대 체력
+
+// 사용자가 입력한 값이 숫자가 아닐경우, 0이나 0보다 작을 경우 100으로 기본 셋팅
+if(isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+  chosenMaxLife = 100;
+}
+
 let currentMonsterHealth = chosenMaxLife; // 몬스터 체력 조정
 let currentPlayerHealth = chosenMaxLife;  // 플레이어 체력 조정
 let hasBonusLife = true;  // 보너스 생명
