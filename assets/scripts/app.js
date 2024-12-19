@@ -10,6 +10,13 @@ let hasBonusLife = true;  // 보너스 생명
 
 adjustHealthBars(chosenMaxLife);  // 최대 체력을 설정하는 체력 조정 함수
 
+// 게임 리셋
+function reset(){
+  currentMonsterHealth = chosenMaxLife; // 몬스터 체력 조정
+  currentPlayerHealth = chosenMaxLife;  // 플레이어 체력 조정
+  resetGame(chosenMaxLife);
+}
+
 function endRound() {
    // 몬스터 공격 전 사용자의 생명 상태를 고정
    const initialPlayerLife = currentPlayerHealth;
@@ -34,6 +41,11 @@ function endRound() {
      alert('You lost!');
    } else if (currentPlayerHealth <=0 && currentMonsterHealth <= 0){
      alert('You have a draw!');  // 무승부
+   }
+
+   // 리셋
+   if(currentMonsterHealth <= 0 || currentPlayerHealth <= 0){
+    reset();
    }
 }
 
