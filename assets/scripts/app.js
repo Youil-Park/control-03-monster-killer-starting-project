@@ -6,14 +6,27 @@ const HEAL_VALUE = 20;          // 최대 회복 체력
 let chosenMaxLife = 100;     // 몬스터의 최대 체력
 let currentMonsterHealth = chosenMaxLife; // 몬스터 체력 조정
 let currentPlayerHealth = chosenMaxLife;  // 플레이어 체력 조정
+let hasBonusLife = true;  // 보너스 생명
 
 adjustHealthBars(chosenMaxLife);  // 최대 체력을 설정하는 체력 조정 함수
 
 function endRound() {
+   // 몬스터 공격 전 사용자의 생명 상태를 고정
+   const initialPlayerLife = currentPlayerHealth;
+
    // 몬스터가 플레이어 공격
    const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
    currentPlayerHealth -= playerDamage;  // 플레이어 체력 - 몬스터 공격
  
+   // 보너스 생명
+   if(currentPlayerHealth <= 0 && hasBonusLife){
+    hasBonusLife = false;
+    removeBonusLife();
+    currentPlayerHealth = initialPlayerLife;
+    setPlayerHealth(initialPlayerLife);
+    alert('You would be dead but the bonus life saved you!');
+   }
+
    // 공격 후 승리했는지 확인
    if (currentMonsterHealth <= 0 && currentPlayerHealth > 0){
      alert('You won!');
