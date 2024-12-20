@@ -141,17 +141,22 @@ function endRound() {
 
 // ATTACK, STRONG ATTACK 버튼 핸들러
 function attackMonster(mode) {
-  let maxDamage;
-  let logEvent;
-  if (mode === MODE_ATTACK) {
-    // ATTACK 버튼
-    maxDamage = ATTACK_VALUE;
-    logEvent = LOG_EVENT_PLAYER_ATTACK
-  } else if (mode === MODE_STRONG_ATTACK) {
-    // STRONG ATTACK 버튼
-    maxDamage = STRONG_ATTACK_VALUE;
-    logEvent = LOG_EVENT_PLAYER_STRONG_ATTACK
-  }
+  // 삼항 연산자 2024.12.20
+  let maxDamage = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
+  let logEvent = 
+    mode === MODE_ATTACK 
+    ? LOG_EVENT_PLAYER_ATTACK 
+    : LOG_EVENT_PLAYER_STRONG_ATTACK;
+
+  // if (mode === MODE_ATTACK) {
+  //   // ATTACK 버튼
+  //   maxDamage = ATTACK_VALUE;
+  //   logEvent = LOG_EVENT_PLAYER_ATTACK
+  // } else if (mode === MODE_STRONG_ATTACK) {
+  //   // STRONG ATTACK 버튼
+  //   maxDamage = STRONG_ATTACK_VALUE;
+  //   logEvent = LOG_EVENT_PLAYER_STRONG_ATTACK
+  // }
 
   const damage = dealMonsterDamage(maxDamage);
   currentMonsterHealth -= damage; // 몬스터 체력 - 공격력
