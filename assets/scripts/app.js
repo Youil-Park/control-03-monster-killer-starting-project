@@ -22,6 +22,7 @@ if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
   chosenMaxLife = 100;
 }
 
+
 let currentMonsterHealth = chosenMaxLife; // 몬스터 체력 조정
 let currentPlayerHealth = chosenMaxLife; // 플레이어 체력 조정
 let hasBonusLife = true; // 보너스 생명
