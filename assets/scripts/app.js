@@ -29,7 +29,7 @@ let hasBonusLife = true; // 보너스 생명
 adjustHealthBars(chosenMaxLife); // 최대 체력을 설정하는 체력 조정 함수
 
 // 로그 기록
-function writeToLog(ev, val, monsterHealth, playerHealth) {
+function writeToLog(ev, val, monsterHealth, playerHealth) { // ev: 발생 이벤트
   let logEntry = {
     event: ev,
     value: val,
@@ -37,41 +37,86 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
     finalPlayerHealth: playerHealth, // 플레이어 체력
   };
 
-  if (ev === LOG_EVENT_PLAYER_ATTACK) {
-    logEntry.target = "MONSTER";
-  } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: "MONSTER",
-      finalMonsterHeal: monsterHealth, // 몬스터 체력
-      finalPlayerHealth: playerHealth, // 플레이어 체력
-    };
-  } else if (ev === LOG_EVENT_MONSTER_ATTACK) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: "PLAYER",
-      finalMonsterHeal: monsterHealth, // 몬스터 체력
-      finalPlayerHealth: playerHealth, // 플레이어 체력
-    };
-  } else if (ev === LOG_EVENT_PLAYER_HEAL) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: "PLAYER",
-      finalMonsterHeal: monsterHealth, // 몬스터 체력
-      finalPlayerHealth: playerHealth, // 플레이어 체력
-    };
-  } else if (ev === LOG_EVENT_GAME_OVER) {
-    logEntry = {
-      event: ev,
-      value: val,
-      finalMonsterHeal: monsterHealth, // 몬스터 체력
-      finalPlayerHealth: playerHealth, // 플레이어 체력
-    };
+  switch (ev) {
+    case LOG_EVENT_PLAYER_ATTACK:
+        logEntry.target = "MONSTER";
+        break;
+    case LOG_EVENT_PLAYER_STRONG_ATTACK:
+        logEntry = {
+          event: ev,
+          value: val,
+          target: "MONSTER",
+          finalMonsterHeal: monsterHealth, // 몬스터 체력
+          finalPlayerHealth: playerHealth, // 플레이어 체력
+        };
+        break;
+    case LOG_EVENT_MONSTER_ATTACK:
+        logEntry = {
+          event: ev,
+          value: val,
+          target: "PLAYER",
+          finalMonsterHeal: monsterHealth, // 몬스터 체력
+          finalPlayerHealth: playerHealth, // 플레이어 체력
+        };
+      break;
+    case LOG_EVENT_PLAYER_HEAL:
+        logEntry = {
+          event: ev,
+          value: val,
+          target: "PLAYER",
+          finalMonsterHeal: monsterHealth, // 몬스터 체력
+          finalPlayerHealth: playerHealth, // 플레이어 체력
+        };
+      break;
+    case LOG_EVENT_GAME_OVER:
+        logEntry = {
+          event: ev,
+          value: val,
+          finalMonsterHeal: monsterHealth, // 몬스터 체력
+          finalPlayerHealth: playerHealth, // 플레이어 체력
+        };
+      break;
+    default:
+      logEntry = {};
   }
-  battleLog.push(logEntry);
+  
+
+
+//   if (ev === LOG_EVENT_PLAYER_ATTACK) {
+//     logEntry.target = "MONSTER";
+//   } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
+//     logEntry = {
+//       event: ev,
+//       value: val,
+//       target: "MONSTER",
+//       finalMonsterHeal: monsterHealth, // 몬스터 체력
+//       finalPlayerHealth: playerHealth, // 플레이어 체력
+//     };
+//   } else if (ev === LOG_EVENT_MONSTER_ATTACK) {
+//     logEntry = {
+//       event: ev,
+//       value: val,
+//       target: "PLAYER",
+//       finalMonsterHeal: monsterHealth, // 몬스터 체력
+//       finalPlayerHealth: playerHealth, // 플레이어 체력
+//     };
+//   } else if (ev === LOG_EVENT_PLAYER_HEAL) {
+//     logEntry = {
+//       event: ev,
+//       value: val,
+//       target: "PLAYER",
+//       finalMonsterHeal: monsterHealth, // 몬스터 체력
+//       finalPlayerHealth: playerHealth, // 플레이어 체력
+//     };
+//   } else if (ev === LOG_EVENT_GAME_OVER) {
+//     logEntry = {
+//       event: ev,
+//       value: val,
+//       finalMonsterHeal: monsterHealth, // 몬스터 체력
+//       finalPlayerHealth: playerHealth, // 플레이어 체력
+//     };
+//   }
+    battleLog.push(logEntry);
 }
 
 // 게임 리셋
