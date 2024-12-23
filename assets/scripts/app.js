@@ -37,6 +37,8 @@ function writeToLog(ev, val, monsterHealth, playerHealth) { // ev: 발생 이벤
     finalPlayerHealth: playerHealth, // 플레이어 체력
   };
 
+  // 2024.12.23
+  // switch case문으로 변환
   switch (ev) {
     case LOG_EVENT_PLAYER_ATTACK:
         logEntry.target = "MONSTER";
