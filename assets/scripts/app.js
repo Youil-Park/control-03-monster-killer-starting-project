@@ -250,7 +250,27 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  console.log(battleLog);
+  
+  // 2024.12.26 for 반복문
+  // 1. for 반복문
+  // for (let i = 0; i < battleLog.length; i++){
+  //   console.log(battleLog[i]);
+  // }
+
+  // 2. for - of
+  // for(const logEntry of battleLog){
+  //   console.log(logEntry);
+  // }
+
+  // 3. for - in
+  let i = 0;
+  for (const logEntry of battleLog){
+    console.log(`#${i}`);
+    for (const key in logEntry) {
+      console.log(`${key} => ${logEntry[key]}`);
+    }
+    i++;
+  }
 }
 
 attackBtn.addEventListener("click", attackHandler); // 공격버튼
