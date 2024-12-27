@@ -271,6 +271,19 @@ function printLogHandler() {
     }
     i++;
   }
+
+  // 2024.12.27 while, do-while
+   let j = 0;
+  // while (j < 3) {
+  //   console.log(j);
+  //   j++;
+  // }
+
+  do {
+    console.log(j);
+    j++;
+  } while (j<3);
+  
 }
 
 attackBtn.addEventListener("click", attackHandler); // 공격버튼
