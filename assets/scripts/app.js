@@ -16,6 +16,7 @@ const enteredValue = prompt("Maximum life for you and the monster.", "100");
 
 let chosenMaxLife = parseInt(enteredValue); // 몬스터의 최대 체력
 let battleLog = []; // 로그를 담을 변수
+let lastLoggedEntry;
 
 // 사용자가 입력한 값이 숫자가 아닐경우, 0이나 0보다 작을 경우 100으로 기본 셋팅
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
@@ -265,24 +266,29 @@ function printLogHandler() {
   // 3. for - in
   let i = 0;
   for (const logEntry of battleLog){
-    console.log(`#${i}`);
-    for (const key in logEntry) {
-      console.log(`${key} => ${logEntry[key]}`);
+    if(!lastLoggedEntry && lastLoggedEntry !==0 || lastLoggedEntry < i) {
+      console.log(`#${i}`);
+      for (const key in logEntry) {
+        console.log(`${key} => ${logEntry[key]}`);
+      }
+      lastLoggedEntry = i;
+      break;
     }
     i++;
+    // break
   }
 
   // 2024.12.27 while, do-while
-   let j = 0;
+  // let j = 0;
   // while (j < 3) {
   //   console.log(j);
   //   j++;
   // }
 
-  do {
-    console.log(j);
-    j++;
-  } while (j<3);
+  // do {
+  //   console.log(j);
+  //   j++;
+  // } while (j<3);
   
 }
 
