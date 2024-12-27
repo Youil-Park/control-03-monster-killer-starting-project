@@ -12,15 +12,32 @@ const LOG_EVENT_MONSTER_ATTACK = "MONSTER_ATTACK";
 const LOG_EVENT_PLAYER_HEAL = "PLAYER_HEAL";
 const LOG_EVENT_GAME_OVER = "GAME_OVER";
 
-const enteredValue = prompt("Maximum life for you and the monster.", "100");
-
-let chosenMaxLife = parseInt(enteredValue); // 몬스터의 최대 체력
 let battleLog = []; // 로그를 담을 변수
 let lastLoggedEntry;
 
-// 사용자가 입력한 값이 숫자가 아닐경우, 0이나 0보다 작을 경우 100으로 기본 셋팅
-if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+// 2024.12.27  try-catch
+function getMaxLifeValues() {
+  const enteredValue = prompt("Maximum life for you and the monster.", "100");  // 체력 입력
+  
+  const parsedValue = parseInt(enteredValue); // 몬스터의 최대 체력
+  
+  // 사용자가 입력한 값이 숫자가 아닐경우, 0이나 0보다 작을 경우 100으로 기본 셋팅
+  if (isNaN(parsedValue) || parsedValue <= 0) {
+    throw {message: 'Invalid user input, not  a number!'};  // throw
+  }
+
+  return parsedValue;
+}
+
+let chosenMaxLife;
+
+// try-catch-finally
+try {
+  chosenMaxLife = getMaxLifeValues();
+} catch(error) {
+  console.log(error);
   chosenMaxLife = 100;
+  alert('You entered something wrong, default value of 100 was used.');
 }
 
 let currentMonsterHealth = chosenMaxLife; // 몬스터 체력 조정
@@ -278,15 +295,23 @@ function printLogHandler() {
     // break
   }
 
-  // 2024.12.27 while, do-while
+  // 2024.12.27 while, do-while, break ,continue
   // let j = 0;
   // while (j < 3) {
   //   console.log(j);
   //   j++;
   // }
-
-  // do {
-  //   console.log(j);
+  // let j = 0;
+  // // 레이블 구문
+  // outerWhile: do {
+  //   console.log('Outer', i);
+  //   innerFor: for(let k = 0; k < 5; k++){
+  //     if(k === 3){
+  //       break outerWhile;
+  //       // continue outerWhile;  // 무한반복
+  //     }
+  //     console.log('Inner',k);
+  //   }
   //   j++;
   // } while (j<3);
   
